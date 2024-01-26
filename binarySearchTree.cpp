@@ -1,3 +1,9 @@
+/*
+ * Author: KhanhND52
+ * Date: 26/1/2024
+ *
+ */
+
 #include <iostream>
 
 int max(int a, int b)
