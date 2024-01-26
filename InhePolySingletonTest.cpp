@@ -3,6 +3,7 @@
  * @author Quang Le (quangle@umich.edu)
  * @brief Full test code to illustrate Inheritance and Polymorphism in C++
  *         also combining namespace, template and many keywords
+ *          Using singleton Design Pattern
  * @version 0.1
  * @date 2024-01-22
  * 
@@ -36,9 +37,9 @@ protected:
 public:
     Base(const Base &source) = delete; //delete copy constructor
 
-    static Base* getInstance(){
+    static Base* getInstance(T a_){
         if(initstate == nullptr){
-            instance = new Base<T>(static_cast<T>(200));
+            instance = new Base<T>(a_);
         }
         return instance;
     }
@@ -66,10 +67,9 @@ protected:
 public:
     
     Derived(const Derived &source) = delete; //delete copy constructor
-
-    static Derived* getInstance(){
+    static Derived* getInstance(T a_, T b_){
         if(instance == nullptr){
-            instance = new Derived<T>(static_cast<T>(25), static_cast<T>(12));
+            instance = new Derived<T>(a_,b_);
         }
         return instance;
     }
@@ -93,8 +93,7 @@ int main(int argc, char const *argv[])
 {
     //Base class pointer
     PRINT_CMD("-------------USING BASE CLASS POINTER:---------------------");
-    // Base *p = new Derived();
-    PolySample::Base<int> *p =  PolySample::Derived<int>::getInstance();
+    PolySample::Base<int> *p =  PolySample::Derived<int>::getInstance(20,24);
     int result = p->getData();
     std::cout << "The result is " << result << std::endl;
     p->display();
@@ -102,13 +101,14 @@ int main(int argc, char const *argv[])
     
     // // Base class reference
     // PRINT_CMD("-------------USING BASE CLASS REFERENCE--------------------:");
-    // PolySample::Derived<int> deriv{25,12};
-    // PolySample::Base<int> &ref = deriv;
+    // PolySample::Derived<int> *deriv = PolySample::Derived<int>::getInstance(15,8);
+    // auto deriv = PolySample::Derived<int>::getInstance(15,8);
+    // PolySample::Base<int> &ref = *deriv;
     // ref.display();
 
-    // //Using with vector
+    //Using with vector (ONLY 1 INSTANCE)
     // PRINT_CMD("---------------USING WITH VECTOR OF RAW POINTERS:--------------");
-    // std::vector<PolySample::Derived<int>*> deriveds { new PolySample::Derived<int>, new PolySample::Derived<int> };
+    // std::vector<PolySample::Derived<int>*> deriveds { PolySample::Derived<int>::getInstance(12,34)}; //Only one instance
     // for (const auto item : deriveds) {
     //     use(item);
     // }
@@ -119,7 +119,8 @@ int main(int argc, char const *argv[])
 
     // //Using with smart pointer
     // PRINT_CMD("---------------USING WITH SMART POINTER:-------------------------");
-    // std::shared_ptr<PolySample::Base<int>> pSmart = std::make_shared<PolySample::Derived<int>>(deriv);
+    // std::shared_ptr<PolySample::Base<int>> pSmart = std::make_shared<PolySample::Derived<int>>(
+    //     *deriv);
     // pSmart->display(); 
 
     // std::vector<std::shared_ptr<PolySample::Base<int>>> vecSmarts;
