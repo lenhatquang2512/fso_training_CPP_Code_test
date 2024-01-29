@@ -18,7 +18,6 @@
 
 #define PRINT_CMD(x) (std::cout << x << std::endl)
 
-
 namespace DesignPattern{
 
 class IllegalLogicException
@@ -102,11 +101,15 @@ DesignPattern::SingletonSample<T,S>*
 template <typename T,typename S>
 void DesignPattern::SingletonSample<T,S>::someBusinessLogic(void) const {
     static T count = static_cast<T>(0); 
-    for(const auto &v : myData.myVec){
-        if(static_cast<T>(v) < myData.stopVal){
-            PRINT_CMD(v); count = count + static_cast<T>(1);
-        }
-    }
+    // for(const auto &v : myData.myVec){
+    //     if(static_cast<T>(v) < myData.stopVal){
+    //           PRINT_CMD(v); count = count + static_cast<T>(1);
+    //     }
+    // }
+    std::for_each((myData.myVec).begin(), (myData.myVec).end(), 
+        [&](const int i) -> void { (static_cast<T>(i) < myData.stopVal) ? (PRINT_CMD(i), 
+        count += static_cast<T>(1)): 0 ;}); //Lambda function
+
     std::cout << "There are " << count << " numbers smaller than " << myData.stopVal << std::endl;
 }
 
