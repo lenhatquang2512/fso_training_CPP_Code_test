@@ -89,6 +89,8 @@ public:
         if(instance == nullptr){
             instance = new Derived<T>(a_,b_);
         }
+        // static Database mInstance(name);  //Lazy
+        // return &mInstance;
         mLocker.unlock();
         return instance;
     }
