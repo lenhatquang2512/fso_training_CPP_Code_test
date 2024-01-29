@@ -18,6 +18,7 @@
 
 #define PRINT_CMD(x) (std::cout << x << std::endl)
 
+
 namespace DesignPattern{
 
 class IllegalLogicException
@@ -28,16 +29,22 @@ public:
 };
 
 template <typename T,typename S>
-class SingletonSample{
-private:
+struct MY_DATA{
     T stopVal;
     S myVec;
+};
+template <typename T,typename S>
+class SingletonSample{
+private:
+    // T stopVal;
+    // S myVec;
+    MY_DATA<T,S> myData;
     static SingletonSample* myInstance;
     static std::mutex myLocker;
-    SingletonSample(const T stopVal_, const S vec_):
-        stopVal(stopVal_),myVec(vec_){
-            auto it = *(std::min_element(myVec.begin(), myVec.end())); 
-            if(stopVal <static_cast<T>(it)){
+    SingletonSample(const T stopVal_, const S myVec_):
+        myData{stopVal_, myVec_}{
+            auto it = *(std::min_element((myData.myVec).begin(), (myData.myVec).end())); 
+            if(myData.stopVal < static_cast<T>(it)){
                 throw IllegalLogicException();
             }   
             PRINT_CMD("Constructor called");
@@ -65,10 +72,10 @@ public:
     void someBusinessLogic(void) const ;
 
     //Encapsulation
-    inline T getStopVal(void) const {return stopVal;};
-    inline S getVec(void) const {return myVec;};
-    inline void setStopVal(T stopVal_) { stopVal = stopVal_;};
-    inline void setmyVec(S myVec_) { myVec = myVec_;};
+    inline T getStopVal(void) const {return myData.stopVal;};
+    inline S getVec(void) const {return myData.myVec;};
+    inline void setStopVal(T stopVal_) { myData.stopVal = stopVal_;};
+    inline void setmyVec(S myVec_) { myData.myVec = myVec_;};
 };
 }
 
@@ -94,11 +101,13 @@ DesignPattern::SingletonSample<T,S>*
 
 template <typename T,typename S>
 void DesignPattern::SingletonSample<T,S>::someBusinessLogic(void) const {
-    for(const auto &v : myVec){
-        if(static_cast<T>(v) < stopVal){
-            PRINT_CMD(v);
+    static T count = static_cast<T>(0); 
+    for(const auto &v : myData.myVec){
+        if(static_cast<T>(v) < myData.stopVal){
+            PRINT_CMD(v); count = count + static_cast<T>(1);
         }
     }
+    std::cout << "There are " << count << " numbers smaller than " << myData.stopVal << std::endl;
 }
 
 void ThreadMain(void){
