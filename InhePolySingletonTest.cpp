@@ -123,6 +123,7 @@ int main(int argc, char const *argv[])
     // std::cout << "The result is " << result << std::endl;
     // p->display();
     // delete p; 
+#endif
     
 #if USING_BASE_CLASS_REFERENCE
     // // Base class reference
@@ -137,7 +138,7 @@ int main(int argc, char const *argv[])
 #if USING_VECTOR_RAW_POINTER
     //Using with vector (ONLY 1 INSTANCE)
     PRINT_CMD("---------------USING WITH VECTOR OF RAW POINTERS:--------------");
-    std::vector<PolySample::Derived<int>*> deriveds { PolySample::Derived<int>::getInstance(12,34), PolySample::Derived<int>::getInstance(43,21)}; //Only one instance
+    std::vector<PolySample::Derived<int>*> deriveds { PolySample::Derived<int>::getInstance(12,34)}; //Only one instance
     for (const auto item : deriveds) {
         use(item);
     }
@@ -167,6 +168,8 @@ int main(int argc, char const *argv[])
     // PolySample::Base<int> obj;
     // obj = 10;
     // obj.getData();
+
+#endif
 
     return 0;
 }

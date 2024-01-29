@@ -41,9 +41,8 @@ public:
         PRINT_CMD("Destructor called");
     }
 
-    static void destroy(){
-        if(nullptr != myInstance)
-        {
+    static void destroy(void){
+        if(nullptr != myInstance){
             delete myInstance;
             myInstance = nullptr;
         }
@@ -103,7 +102,7 @@ void ThreadQuang(void){
 
 void ThreadOther(void){
     // Following code emulates slow initialization
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     std::vector<int> vect{ 2,4,6,8,10,12,14,16,18,20,24,26,28 };
     DesignPattern::SingletonSample<int,std::vector<int>>* singleObj = 
         DesignPattern::SingletonSample<int,std::vector<int>>::getMyInstance(25,vect);
