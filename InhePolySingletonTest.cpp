@@ -110,11 +110,11 @@ int main(int argc, char const *argv[])
 {
     //Base class pointer
     PRINT_CMD("-------------USING BASE CLASS POINTER:---------------------");
-    // PolySample::Base<int> *p =  PolySample::Derived<int>::getInstance(20,24);
-    // int result = p->getData();
-    // std::cout << "The result is " << result << std::endl;
-    // p->display();
-    // delete p; 
+    PolySample::Base<int> *p =  PolySample::Derived<int>::getInstance(20,24);
+    int result = p->getData();
+    std::cout << "The result is " << result << std::endl;
+    p->display();
+    delete p; 
     
     // // Base class reference
     PRINT_CMD("-------------USING BASE CLASS REFERENCE--------------------:");
@@ -140,14 +140,14 @@ int main(int argc, char const *argv[])
     // std::make_unique<PolySample::Derived<int>>(*deriv);
     // pSmart->display(); 
 
-    std::vector<std::unique_ptr<PolySample::Base<int>>> vecSmarts;
-    vecSmarts.push_back(std::make_unique<PolySample::Derived<int>>(
-        *(PolySample::Derived<int>::getInstance(15,8)))); // comment out delete copy constructor
+    // std::vector<std::unique_ptr<PolySample::Base<int>>> vecSmarts;
+    // vecSmarts.push_back(std::make_unique<PolySample::Derived<int>>(
+    //     *(PolySample::Derived<int>::getInstance(15,8)))); // comment out delete copy constructor
 
-    for(const auto &v: vecSmarts){
-        v->display();
-        v->getData();
-    }
+    // for(const auto &v: vecSmarts){
+    //     v->display();
+    //     v->getData();
+    // }
 
     // Test explicit
     // PolySample::Base<int> obj;

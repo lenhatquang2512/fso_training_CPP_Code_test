@@ -5,11 +5,12 @@
 clear
 
 #compile
-g++  -pthread -std=c++14 -Wall -O0 -g InhePolySingletonTest.cpp -o InhePolySingletonTest
+# g++  -pthread -std=c++14 -Wall -O0 -g InhePolySingletonTest.cpp -o InhePolySingletonTest
+g++  -pthread -std=c++14 -Wall -O0 -g Singleton_guru.cpp -o Singleton_guru
 
 #not necessary , make this file executable
-chmod +x InhePolySingletonTest
+chmod +x Singleton_guru
 
 #run
-./InhePolySingletonTest
+./Singleton_guru
 
