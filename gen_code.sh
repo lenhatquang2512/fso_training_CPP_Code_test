@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/quang_le/quang_prog/test/test_code_cpp_tut/fso_training_git/
+# cd /home/quang_le/quang_prog/test/test_code_cpp_tut/fso_training_git/
 
 clear
 
