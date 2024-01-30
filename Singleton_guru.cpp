@@ -4,7 +4,7 @@
  * @brief Thread safe Eager Initialization Singleton Design Pattern with 2 Templates
  * @version 0.1
  * @date 2024-01-29
- * 
+ * @ref https://refactoring.guru/design-patterns/singleton
  * @copyright Copyright (c) 2024
  * 
  */

@@ -55,7 +55,7 @@ public:
     {
         if (head == nullptr)
         {
-            head = new Node(data_);
+            head = new Node<T>(data_);
         }
         else
         {
@@ -82,7 +82,7 @@ public:
         }
         else
         {
-            Node<T> *temp = new Node(data_);
+            Node<T> *temp = new Node<T>(data_);
             temp->next = head;
             head = temp;
         }
