@@ -11,6 +11,12 @@ int max(int a, int b)
     return (a > b)?a:b;
 }
 
+/**
+ * @brief Class binary tree which have nodes. Each node
+ * contains a data type T and 2 pointer to its 2 children.
+ * 
+ * @tparam T 
+ */
 template<typename T>
 class binarySearchTree
 {
@@ -36,6 +42,14 @@ public:
         }
     };
 
+    /**
+     * @brief Insert a new node to tree. If data of new node is 
+     * smaller than root's data, then it would be put on the left 
+     * side and so on. With new node with bigger data than root's data,
+     * everything is opposite.
+     * 
+     * @param data_ data of new node
+     */
     void insert(T data_)
     {
         if (data_ < this->data)
@@ -66,6 +80,10 @@ public:
         }
     }
 
+    /**
+     * @brief Depth tranversion
+     * 
+     */
     void deepTranverse()
     {
         if (this->left != nullptr)
