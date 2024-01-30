@@ -9,7 +9,7 @@ clear
 g++  -pthread -std=c++14 -Wall -O0 -g Singleton_guru.cpp -o Singleton_guru
 
 #not necessary , make this file executable
-chmod +x Singleton_guru
+# chmod +x Singleton_guru
 
 #run
 ./Singleton_guru

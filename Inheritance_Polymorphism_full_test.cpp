@@ -16,7 +16,7 @@
 #define PRINT_CMD(x) (std::cout << x << std::endl)
 
 /**
- * @brief Inheritance and polymorphism sample
+ * @brief Please refer to : https://khalilstemmler.com/articles/object-oriented/programming/4-principles/
  * 
  */
 namespace PolySample{
