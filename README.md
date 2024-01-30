@@ -15,8 +15,8 @@ Any questions should be sent to FSO. The authors not responsible to handle any i
 ### Contributors FSO
 
 * QuangLN6
-* QuynhTT13
+* QuynhDT13
 * KhanhND52
 
-![](https://github.com/lenhatquang2512/fso_training_CPP_Code_test/blob/master/fso.png)
+![](https://github.com/lenhatquang2512/fso_training_CPP_Code_test/blob/Quynh/hi.png)
 
