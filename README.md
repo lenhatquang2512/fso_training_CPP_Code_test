@@ -8,15 +8,17 @@ Please feel free to add and modify. This is non-license and free to use.
 * Dev 2 : Design Pattern (Singeleton,...)
 * Dev 3 : Model-based Design (OOA and OOD)
 
-### Notes
 
-Any questions should be sent to FSO. The authors not responsible to handle any issues about this repo.
 
 ### Contributors FSO
 
 * QuangLN6
 * QuynhDT13
 * KhanhND52
+
+### Notes
+
+Any questions should be sent to FSO. The authors not responsible to handle any issues about this repo.
 
 ![](https://github.com/lenhatquang2512/fso_training_CPP_Code_test/blob/Quynh/hi.png)
 
