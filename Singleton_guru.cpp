@@ -20,11 +20,14 @@
 
 namespace DesignPattern{
 
-class IllegalLogicException
+class IllegalLogicException :public std::exception
 {
 public:
-    IllegalLogicException() = default;
+    IllegalLogicException() noexcept = default;
     ~IllegalLogicException() = default;
+    virtual const char* what() const noexcept{
+        return "Could not create single object";
+    }
 };
 
 template <typename T,typename S>
@@ -125,7 +128,7 @@ void ThreadMain(void){
         singleObj->someBusinessLogic();
     }
     catch(const DesignPattern::IllegalLogicException &ex){
-        PRINT_CMD("Could not create single object");
+        PRINT_CMD(ex.what());
     }
     // singleObj->destroy();
 }
@@ -142,7 +145,7 @@ void ThreadOther(void){
         singleObj->someBusinessLogic();
     }
     catch(const DesignPattern::IllegalLogicException &ex){
-        PRINT_CMD("Could not create single object");
+        PRINT_CMD(ex.what());
     }
     // singleObj->destroy();
 }
