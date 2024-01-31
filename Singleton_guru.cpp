@@ -16,6 +16,7 @@
 #include <thread>
 #include <algorithm>  
 #include <iomanip>
+#include <fstream>
 
 #define PRINT_CMD(x) (std::cout << x << std::endl)
 
@@ -111,11 +112,12 @@ void DesignPattern::SingletonSample<T,S>::someBusinessLogic(void) const {
     //           PRINT_CMD(v); count = count + static_cast<T>(1);
     //     }
     // }
+    // std::cout.setf(std::ios::scientific | std::ios::fixed);
     std::cout << std::showbase << std::uppercase << std::showpos;
     std::for_each((myData.myVec).begin(), (myData.myVec).end(), 
         [&](const int i) -> void { (static_cast<T>(i) < myData.stopVal) ? (PRINT_CMD(std::hex<<i), 
         count += static_cast<T>(1)): 0 ;}); //Lambda function
-
+    std::cout << std::resetiosflags(std::ios::showbase);
     std::cout << "There are " << count << " numbers smaller than " << myData.stopVal << std::endl;
 }
 
