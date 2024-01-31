@@ -12,13 +12,22 @@
 #include <stdlib.h>
 
 using namespace std;
-
+/**
+ * @brief struct  Node
+ * 
+ */
 struct Node
 {
     int data;
     struct Node* next;
     
 };
+/**
+ * @brief Insert Begin in Linked List
+ * 
+ * @param head_ref 
+ * @param new_data 
+ */
 void Insert_Begin(struct Node** head_ref, int new_data){
     struct Node *newnode = new Node();
 
@@ -29,7 +38,12 @@ void Insert_Begin(struct Node** head_ref, int new_data){
     // move head to new data
     (*head_ref) = newnode;
 }
-
+/**
+ * @brief Insert After in Linked List
+ * 
+ * @param prev_node 
+ * @param new_data 
+ */
 void Insert_After(struct Node* prev_node, int new_data){
     if (prev_node == NULL)
     {
@@ -45,7 +59,12 @@ void Insert_After(struct Node* prev_node, int new_data){
     prev_node->next = newnode;
 
 }
-
+/**
+ * @brief Insert in the end of Linked List
+ * 
+ * @param head_ref 
+ * @param new_data 
+ */
 void Insert_End(struct Node** head_ref, int new_data){
     struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
     struct Node* last = *head_ref;
@@ -65,7 +84,12 @@ void Insert_End(struct Node** head_ref, int new_data){
     
 }
 
-// delete node
+/**
+ * @brief delete Node with key
+ * 
+ * @param head_ref 
+ * @param key 
+ */
    
 void deleteNode(struct Node**head_ref, int key){
     struct Node* temp = *head_ref, *prev;
@@ -92,7 +116,14 @@ void deleteNode(struct Node**head_ref, int key){
     }
    }
 
-//Search a node
+/**
+ * @brief Search a node with key
+ * 
+ * @param head_ref 
+ * @param key 
+ * @return true 
+ * @return false 
+ */
     bool searchNode(struct Node** head_ref, int key){
         struct Node* current = *head_ref;
         while (current != NULL)
@@ -106,7 +137,11 @@ void deleteNode(struct Node**head_ref, int key){
         }
         return false;
     }
-// Sort the linked list
+/**
+ * @brief Sort the linked list
+ * 
+ * @param head_ref 
+ */
 void sortLinkedList(struct Node** head_ref) {
   struct Node *current = *head_ref, *index = NULL;
   int temp;
@@ -130,7 +165,11 @@ void sortLinkedList(struct Node** head_ref) {
   }
   }
 }
-
+/**
+ * @brief Print the Linked list
+ * 
+ * @param node 
+ */
 void Print(struct Node* node){
     while (node != NULL)
     {
@@ -140,7 +179,11 @@ void Print(struct Node* node){
     
 }
     
-
+/**
+ * @brief main function
+ * 
+ * @return int 
+ */
 int main(){
     struct Node* head = NULL;
     Insert_End(&head, 1);
