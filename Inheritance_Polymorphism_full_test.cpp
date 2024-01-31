@@ -30,7 +30,7 @@ public:
         Base(static_cast<T>(200)){ std::cout << "Base constructor no args called" << std::endl;};
     explicit Base(T a_):
         a{a_}{ std::cout << "Base constructor with args called" << std::endl;};
-    virtual ~Base() {std::cout << "Base destructor called" << std::endl;};
+    virtual ~Base() noexcept {std::cout << "Base destructor called" << std::endl;};
     virtual inline T getData(void) const { std::cout << "Get base data " << this->a << std::endl; return this->a;};
     virtual inline void setData(T a_des) {a = a_des;};
     virtual inline void display(void) const = 0; // Pure virtual function
@@ -50,7 +50,7 @@ public:
             std::cout << "Derived constructor with args called" << std::endl;
         };
     // virtual ~Derived() = default;
-    virtual ~Derived() {std::cout << "Derived destructor called" << std::endl;}
+    virtual ~Derived() noexcept {std::cout << "Derived destructor called" << std::endl;}
     virtual inline T getData(void) const override final {std::cout << "Get derived data: " << this->a <<std::endl; return this->b;}
     virtual inline void setData(T b_des) override final {b = b_des;};
     virtual inline void display(void) const override final { std::cout << this->a << " " << b << std::endl;}

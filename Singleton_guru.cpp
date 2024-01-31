@@ -15,6 +15,7 @@
 #include <mutex>
 #include <thread>
 #include <algorithm>  
+#include <iomanip>
 
 #define PRINT_CMD(x) (std::cout << x << std::endl)
 
@@ -47,7 +48,8 @@ private:
         myData{stopVal_, myVec_}{
             auto it = *(std::min_element((myData.myVec).begin(), (myData.myVec).end())); 
             if(myData.stopVal < static_cast<T>(it)){
-                throw IllegalLogicException();
+                //Note : Do not use exception in the function that returns value/pointer.etc..
+                throw IllegalLogicException(); 
             }   
             PRINT_CMD("Constructor called");
         }
@@ -58,7 +60,7 @@ public:
     //no overloading assignment operator (Not assignable)
     SingletonSample& operator=(const SingletonSample &rhs) = delete;
 
-    ~SingletonSample(void){
+    ~SingletonSample(void) noexcept {  //No throw in destructor
         PRINT_CMD("Destructor called");
     }
 
@@ -109,8 +111,9 @@ void DesignPattern::SingletonSample<T,S>::someBusinessLogic(void) const {
     //           PRINT_CMD(v); count = count + static_cast<T>(1);
     //     }
     // }
+    std::cout << std::showbase << std::uppercase << std::showpos;
     std::for_each((myData.myVec).begin(), (myData.myVec).end(), 
-        [&](const int i) -> void { (static_cast<T>(i) < myData.stopVal) ? (PRINT_CMD(i), 
+        [&](const int i) -> void { (static_cast<T>(i) < myData.stopVal) ? (PRINT_CMD(std::hex<<i), 
         count += static_cast<T>(1)): 0 ;}); //Lambda function
 
     std::cout << "There are " << count << " numbers smaller than " << myData.stopVal << std::endl;
@@ -120,7 +123,6 @@ void ThreadMain(void){
     // Following code emulates slow initialization
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     std::vector<int> vect{ 5,10,15,20,25,30,35,40 };
-
     try{
         DesignPattern::SingletonSample<int,std::vector<int>>* singleObj = 
             DesignPattern::SingletonSample<int,std::vector<int>>::getMyInstance(28,vect);
