@@ -23,7 +23,12 @@ private:
     Base(int x) {cout << "Base parameter constructor" << endl;}   ;
 public:
     static Base* getintance(){
-        lock_guard<mutex> lock(mMutex);
+        /**
+         * @brief if not have mutex -> naive singleton
+         * not to only single instance
+         * 
+         */
+        // lock_guard<mutex> lock(mMutex);
         if(instance == nullptr){
             instance = new Base();
         }
