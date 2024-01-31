@@ -42,7 +42,7 @@ public:
     virtual inline void setData(T a_des) {a = a_des;};
     virtual inline void display(void) const = 0; // Pure virtual function
     // virtual inline void display(void) const { std::cout << this->a << " "  << std::endl;}; // Pure virtual function
-    virtual inline Base *Clone() const = 0;
+    virtual inline std::shared_ptr<Base> Clone() const = 0;
 };
 
 template <typename T>
@@ -63,7 +63,7 @@ public:
     virtual inline T getData(void) const override {std::cout << "Get DerivedType1 data: " << this->a <<std::endl; return this->b;}
     virtual inline void setData(T b_des) override {b = b_des;};
     virtual inline void display(void) const override final { std::cout << this->a << " " << b << std::endl;}
-    virtual inline Base<T> *Clone() const override { return new DerivedType1<T>(*this); }
+    virtual inline std::shared_ptr<Base<T>> Clone() const override { return std::make_shared<DerivedType1<T>>(*this); }
 };
 
 template <typename T>
@@ -85,7 +85,7 @@ public:
     virtual inline T getData(void) const override final {std::cout << "Get DerivedType2 data: " << this->a <<std::endl; return this->b;}
     virtual inline void setData(T b_des) override {b = b_des;};
     virtual inline void display(void) const override { std::cout << this->a << " " << b << " " << c << std::endl;}
-    virtual inline Base<T> *Clone() const override { return new DerivedType2<T>(*this); }
+    virtual inline std::shared_ptr<Base<T>> Clone() const override { return std::make_shared<DerivedType2<T>>(*this); }
 };
 
 template<typename T>
@@ -106,14 +106,14 @@ public:
         delete prototypes[CloneType::PROTOTYPE_2];
     }
 
-    Base<T>* CreatePrototype(CloneType type)
+    std::shared_ptr<Base<T>> CreatePrototype(CloneType type)
     {
         return prototypes[type]->Clone();
     }
 };
 
 template <typename T>
-void use(Base<T>* base) {
+void use(std::shared_ptr<Base<T>> base) {
     base->display();
 }
 }
@@ -164,17 +164,14 @@ int main(int argc, char const *argv[])
     */
 
     PRINT_CMD("---------------: USING PROTOTYPE DESIGN PATTERN :---------------");
-    PolySample::PrototypeFactory<int> *Factory = new PolySample::PrototypeFactory<int>();
-    PolySample::Base<int>* Clone1 = Factory->CreatePrototype(PolySample::CloneType::PROTOTYPE_1);
-    PolySample::Base<int>* Clone2 = Factory->CreatePrototype(PolySample::CloneType::PROTOTYPE_2);
+    std::unique_ptr<PolySample::PrototypeFactory<int>> Factory = std::make_unique<PolySample::PrototypeFactory<int>>();
+    std::shared_ptr<PolySample::Base<int>> Clone1 = Factory->CreatePrototype(PolySample::CloneType::PROTOTYPE_1);
+    std::shared_ptr<PolySample::Base<int>> Clone2 = Factory->CreatePrototype(PolySample::CloneType::PROTOTYPE_2);
     PolySample::use(Clone1);
     PolySample::use(Clone2);
     Clone1->setData(100);
     Clone2->setData(200);
     PolySample::use(Clone1);
     PolySample::use(Clone2);
-    delete Clone1;
-    delete Clone2;
-    delete Factory;
     return 0;
 }
