@@ -92,18 +92,17 @@ template<typename T>
 class PrototypeFactory 
 {
 private:
-    std::unordered_map<CloneType, Base<T>*, std::hash<int>> prototypes;
+    std::unordered_map<CloneType, std::shared_ptr<Base<T>>, std::hash<int>> prototypes;
 public:
     PrototypeFactory()
     {
-        prototypes[CloneType::PROTOTYPE_1] = new DerivedType1<T>();
-        prototypes[CloneType::PROTOTYPE_2] = new DerivedType2<T>();
+        prototypes[CloneType::PROTOTYPE_1] = std::make_shared<DerivedType1<T>>();
+        prototypes[CloneType::PROTOTYPE_2] = std::make_shared<DerivedType2<T>>(); 
     }
 
     ~PrototypeFactory()
     {
-        delete prototypes[CloneType::PROTOTYPE_1];
-        delete prototypes[CloneType::PROTOTYPE_2];
+        std::cout << "Deleting Prototype Factory" << std::endl;
     }
 
     std::shared_ptr<Base<T>> CreatePrototype(CloneType type)
